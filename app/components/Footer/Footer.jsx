@@ -9,22 +9,16 @@ import CustomerSupportIcon from "../../../public/img/customersupport.png";
 import SecurePaymentIcon from "../../../public/img/securepayment.png";
 import OrderReturnIconm from "../../../public/img/orderreturn.png";
 import { LinkHighLight } from "../ui/LinkHighLight";
-import {
-  Headset,
-  Link as LinkIcon,
-  Mail,
-  MapPin,
-  PhoneCall,
-} from "lucide-react";
+import { Headset, Mail, MapPin, PhoneCall } from "lucide-react";
 import { HeaderData } from "@/data/Header";
-import { convertToBengaliNumbers, rgbaToHexWithAlpha } from "@/lib/utils";
+import { convertToBengaliNumbers } from "@/lib/utils";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import LogoURI from "../../../public/img/logo.png";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GrAppleAppStore } from "react-icons/gr";
 
-const FooterFeturesData = [
+export const FooterFeturesData = [
   {
     icon: FreeDeliveryIcon,
     title: "ফ্রী ডেলিভারি",
