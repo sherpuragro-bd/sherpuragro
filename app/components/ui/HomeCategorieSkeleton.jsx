@@ -17,7 +17,7 @@ const HomeCategorieSkeleton = () => {
               </button>
             </div>
           </div>
-          <div className="w-full overflow-x-hidden gap-5 flex justify-between">
+          <div className="w-full overflow-x-hidden gap-5 flex mt-5 justify-between">
             {Array.from({ length: 10 }).map((_, index) => (
               <div
                 key={`category-skeleton-${Math.random(34)}`}

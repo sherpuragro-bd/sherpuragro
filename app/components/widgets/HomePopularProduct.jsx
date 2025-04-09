@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import PopularProducts from "./PopularProducts";
 import ProductCardFallback from "../ui/ProductCardFallback";
+import PopularProducts from "./PopularProducts";
 
 const HomePopularProduct = () => {
   return (

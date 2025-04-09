@@ -9,10 +9,16 @@ import { rgbaToHexWithAlpha } from "@/lib/utils";
 import LoadingPlaceholder from "../../../public/img/placeholder.png";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import HomeCategorieSkeleton from "../ui/HomeCategorieSkeleton";
 
 export default function HomeCategories({ data }) {
   const categorySliderRef = useRef();
+  const [windowLoaded, setwindowLoaded] = useState(false);
+
+  useEffect(() => {
+    setwindowLoaded(true);
+  }, []);
 
   const [categories, setcategories] = useState(data);
 
@@ -44,48 +50,64 @@ export default function HomeCategories({ data }) {
             </button>
           </div>
         </div>
-        <Swiper
-          ref={categorySliderRef}
-          className="mt-5"
-          modules={[Autoplay, Navigation]}
-          autoplay={{ delay: 1000 }}
-          spaceBetween={20}
-          speed={1000}
-          loop={true}
-          slidesPerView={3}
-          breakpoints={{
-            640: { slidesPerView: 4 },
-            768: { slidesPerView: 6 },
-            1024: { slidesPerView: 10 },
-          }}
-        >
-          {categories
-            .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity))
-            .map((category) => (
-              <SwiperSlide key={`category-key-${Math.random(34234324)}`}>
-                <Link
-                  className={`p-5 border rounded-xl text-center group flex-col hover:!bg-white items-center gap-3 hover:border-primary/50 transition-all justify-center flex`}
-                  style={{
-                    background: rgbaToHexWithAlpha(JSON.parse(category.color)),
-                  }}
-                  href={`/categories/${category.permalLink}`}
-                >
-                  <Image
-                    className="group-hover:scale-125 transition-all"
-                    width={60}
-                    height={60}
-                    alt={category.nameCategory}
-                    src={category.categoryIconImage || LoadingPlaceholder}
-                  />
-                  <div className="flex text-center justify-center w-full overflow-visible">
-                    <span className="group-hover:underline whitespace-nowrap">
-                      {category.nameCategory}
-                    </span>
-                  </div>
-                </Link>
-              </SwiperSlide>
+        {windowLoaded ? (
+          <Swiper
+            ref={categorySliderRef}
+            className="mt-5"
+            modules={[Autoplay, Navigation]}
+            autoplay={{ delay: 1000 }}
+            spaceBetween={20}
+            speed={1000}
+            loop={true}
+            slidesPerView={3}
+            breakpoints={{
+              640: { slidesPerView: 4 },
+              768: { slidesPerView: 6 },
+              1024: { slidesPerView: 10 },
+            }}
+          >
+            {categories
+              .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity))
+              .map((category) => (
+                <SwiperSlide key={`category-key-${Math.random(34234324)}`}>
+                  <Link
+                    className={`p-5 border rounded-xl text-center group flex-col hover:!bg-white items-center gap-3 hover:border-primary/50 transition-all justify-center flex`}
+                    style={{
+                      background: rgbaToHexWithAlpha(
+                        JSON.parse(category.color)
+                      ),
+                    }}
+                    href={`/categories/${category.permalLink}`}
+                  >
+                    <Image
+                      className="group-hover:scale-125 transition-all"
+                      width={60}
+                      height={60}
+                      alt={category.nameCategory}
+                      src={category.categoryIconImage || LoadingPlaceholder}
+                    />
+                    <div className="flex text-center justify-center w-full overflow-visible">
+                      <span className="group-hover:underline whitespace-nowrap">
+                        {category.nameCategory}
+                      </span>
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        ) : (
+          <div className="w-full overflow-x-hidden gap-5 flex justify-between mt-5">
+            {Array.from({ length: 10 }).map((_, index) => (
+              <div
+                key={`category-skeleton-${Math.random(34)}`}
+                className="p-5 border flex justify-center items-center flex-col rounded-xl bg-gradient-to-br from-slate-100 to-slate-200"
+              >
+                <Skeleton className={`w-[70px] h-[60px] rounded-lg`} />
+                <Skeleton className={`w-[60px] h-[20px] rounded-sm mt-3`} />
+              </div>
             ))}
-        </Swiper>
+          </div>
+        )}
       </div>
     </section>
   );
