@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="border col-span-1 transition-all overflow-hidden cursor-pointer rounded-xl hover:border-primary/60 h-full flex flex-col">
+    <div className="border col-span-1 transition-all overflow-hidden rounded-xl hover:border-primary/60 h-full flex flex-col">
       <Link
         className="group relative flex justify-center items-center"
         href={`/products/${product._doc.permalLink}`}

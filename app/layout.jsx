@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
         id="body"
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
         data-gr-ext-installed=""
-        data-new-gr-c-s-check-loaded="14.1229.0"
+        data-new-gr-c-s-check-loaded="14.1231.0"
       >
         <ReProgressProviders>
           <TanstackQuery>
@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
               <TooltipProvider>{children}</TooltipProvider>
             </StepProvider>
             <Toaster
-              position="center-bottom"
+              position="center-top"
               toastOptions={{
                 style: {
                   zIndex: "9999999999999999999999999 !important",

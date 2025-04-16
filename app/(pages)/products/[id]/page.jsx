@@ -88,7 +88,7 @@ const ProductDetailsPage = async ({ params }) => {
               <ProductDetails data={productDetails} />
             </div>
             {productDetails.content && (
-              <div className="border border-b-0 rounded-b-none rounded-2xl mt-10 p-5">
+              <div className="border rounded-2xl mt-10 p-5">
                 <h2 className="text-2xl">ডেসক্রিপশন </h2>
                 <span className="flex w-full h-[1px] bg-border my-3 mb-5" />
                 <p

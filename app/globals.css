@@ -180,6 +180,9 @@ span.swiper-pagination-bullet {
     background-image: var(--mobile-bg, var(--tablet-bg, var(--desktop-bg)));
   }
 }
+.jodit-workplace {
+  color: #253d4e;
+}
 .jodit-workplace h1 {
   font-size: 2em;
   line-height: 1.2;
@@ -212,6 +215,7 @@ span.swiper-pagination-bullet {
 
 .jodit-workplace p {
   font-size: 1em;
+  font-weight: 300;
   line-height: 1.5;
 }
 

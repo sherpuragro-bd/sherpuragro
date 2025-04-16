@@ -11,7 +11,7 @@ const ProductSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     discountPrice: { type: Number },
     status: { type: String, enum: ["published", "draft"], required: true },
-    minQuantity: { type: Number, required: true },
+    minQuantity: { type: Number, required: true, default: 1 },
     maxQuantity: { type: Number, default: 2000 },
     categories: {
       type: [

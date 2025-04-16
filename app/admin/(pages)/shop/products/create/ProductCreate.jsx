@@ -94,7 +94,6 @@ const ProductsCreate = () => {
       isPopular: isPopular,
     };
     const res = await createNewProduct(payload);
-    console.log(res);
     if (res?.success) {
       router.push(`/admin/shop/products/update/${permalLink}`);
       toast.success(res.msg);

@@ -1,5 +1,7 @@
 import { convertToBengaliNumbers } from "@/lib/utils";
 import { Infinity } from "lucide-react";
+import ProductShortDes from "./ProductShortDes";
+import ProductActions from "./ProductActions";
 
 const ProductDetails = ({ data }) => {
   return (
@@ -26,7 +28,9 @@ const ProductDetails = ({ data }) => {
           </span>
         </div>
         <h2 className="text-4xl">{data.name}</h2>
-        {data?.description && <p className="font-light">{data?.description}</p>}
+        {data?.description && (
+          <ProductShortDes className="font-light" text={data?.description} />
+        )}
         <div className="flex gap-2 items-end">
           <span className="text-4xl text-primary">
             {data?.discountPrice
@@ -52,6 +56,7 @@ const ProductDetails = ({ data }) => {
             )}
           </div>
         </div>
+        <ProductActions data={data} />
       </div>
     </>
   );
