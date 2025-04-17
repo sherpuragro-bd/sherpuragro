@@ -18,9 +18,8 @@ export default function Search() {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const router = useRouter();
-  const searchRef = useRef(null); // for detecting outside clicks
+  const searchRef = useRef(null);
 
-  // Debounce effect
   useEffect(() => {
     if (!search) {
       setIsSearching(false);
@@ -34,7 +33,6 @@ export default function Search() {
     return () => clearTimeout(delayDebounce);
   }, [search]);
 
-  // Fetch products when debouncedSearch changes
   useEffect(() => {
     const fetchSearchResults = async () => {
       if (debouncedSearch.length === 0) return;
@@ -48,7 +46,6 @@ export default function Search() {
     fetchSearchResults();
   }, [debouncedSearch]);
 
-  // Detect click outside of the search dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -72,6 +69,7 @@ export default function Search() {
       <div className="relative">
         <div className="px-5 flex items-center border py-[5px] focus-within:border-primary/50 transition-all rounded-md">
           <input
+            value={search}
             type="text"
             placeholder="পণ্য খুজুন"
             onChange={(e) => setSearch(e.target.value)}
@@ -85,7 +83,10 @@ export default function Search() {
         <AnimatePresence>
           {isSearching && (
             <motion.div
-              onClick={() => setIsSearching(false)}
+              onClick={() => {
+                setIsSearching(false);
+                setSearch("");
+              }}
               animate={{ translateY: 8, opacity: 1 }}
               initial={{ opacity: 0 }}
               exit={{ opacity: 0 }}

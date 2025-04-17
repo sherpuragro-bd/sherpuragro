@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/popover";
 import Image from "next/image";
 import {
-  ArrowRight,
   LogIn,
   LogOut,
   MapPin,
@@ -22,7 +21,7 @@ import {
   X,
 } from "lucide-react";
 import { logoutUser } from "@/actions/auth/login";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ShopContext } from "@/app/context/ShopContext";
 import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
@@ -62,7 +61,7 @@ export default function IconTray({ user, avatar, userData }) {
                       </Link>
                       <div className="flex flex-col">
                         <Link
-                          className="text-xs hover:text-primary transition-all font-light"
+                          className="text-sm hover:text-primary transition-all font-light"
                           href={`/products/${cartItem.permalLink}`}
                         >
                           {cartItem.name?.slice(0, 25)}{" "}

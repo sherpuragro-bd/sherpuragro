@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export const ShopContext = createContext();
 
@@ -49,6 +50,22 @@ export const ShopContextProvider = ({ children }) => {
     });
   };
 
+  const updateProductQuanity = (permalLink, quantity) => {
+    if (quantity < 1) {
+      return;
+    }
+
+    if (quantity > 1000) {
+      return;
+    }
+
+    setcartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.permalLink === permalLink ? { ...item, quantity } : item
+      )
+    );
+  };
+
   return (
     <ShopContext.Provider
       value={{
@@ -56,6 +73,7 @@ export const ShopContextProvider = ({ children }) => {
         setcartItems,
         removeItemFromCart,
         addItemToCart,
+        updateProductQuanity,
       }}
     >
       {children}
