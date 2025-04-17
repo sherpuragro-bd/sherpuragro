@@ -170,7 +170,7 @@ const Compare = ({ count = 0 }) => {
 
 export const Cart = ({ count = 0 }) => {
   return (
-    <Link href={"#cart"} className="flex items-end gap-2">
+    <div className="flex items-end gap-2">
       <div>
         <span className="font-en bg-primary z-10 relative text-white scale-75 font-medium p-1 -mb-3 translate-x-2 justify-center items-center flex rounded-full text-sm">
           {count}
@@ -178,7 +178,7 @@ export const Cart = ({ count = 0 }) => {
         <PiShoppingCartThin className="opacity-60" size={28} />
       </div>
       <span className="font-light hidden sm:block">কার্ট</span>
-    </Link>
+    </div>
   );
 };
 
