@@ -2,6 +2,9 @@ import { convertToBengaliNumbers } from "@/lib/utils";
 import { Infinity } from "lucide-react";
 import ProductShortDes from "./ProductShortDes";
 import ProductActions from "./ProductActions";
+import { Label } from "@/app/components/ui/Label";
+import Link from "next/link";
+import { ShopContextProvider } from "@/app/context/ShopContext";
 
 const ProductDetails = ({ data }) => {
   return (
@@ -43,10 +46,12 @@ const ProductDetails = ({ data }) => {
               <>
                 {data.discountPrice < data.price && (
                   <span className="text-sm -mb-2 text-yellow-500 font-light">
-                    {Math.round(
-                      ((data.price - data.discountPrice) / data.price) * 100
+                    {convertToBengaliNumbers(
+                      Math.round(
+                        ((data.price - data.discountPrice) / data.price) * 100
+                      )
                     )}
-                    % off
+                    % ডিস্কাউন্ট
                   </span>
                 )}
                 <span className="line-through text-xl">

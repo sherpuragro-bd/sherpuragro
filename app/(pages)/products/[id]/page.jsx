@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
   if (!product) return {};
 
   return {
-    title: product.seoTitle || product.name,
+    title: `${product.seoTitle || product.name} || শেরপুর এগ্রো`,
     description: product.seoDes || product.description,
     keywords: product.tags?.join(", ") || "শেরপুর এগ্রো",
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),

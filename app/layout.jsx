@@ -11,6 +11,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ReProgressProviders from "./context/ProgressProvider";
 import TanstackQuery from "./context/TanstackQuery";
 import Footer from "./components/Footer/Footer";
+import { ShopContextProvider } from "./context/ShopContext";
 
 const liAdorNoirrit = localFont({
   src: "../public/fonts/adornoirit.ttf",
@@ -34,36 +35,38 @@ export default function RootLayout({ children }) {
         id="body"
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
         data-gr-ext-installed=""
-        data-new-gr-c-s-check-loaded="14.1231.0"
+        data-new-gr-c-s-check-loaded="14.1232.0"
       >
         <ReProgressProviders>
-          <TanstackQuery>
-            <HideWrapper toHide={`/admin`}>
-              <Header />
-            </HideWrapper>
-            <StepProvider>
-              <TooltipProvider>{children}</TooltipProvider>
-            </StepProvider>
-            <Toaster
-              position="center-top"
-              toastOptions={{
-                style: {
-                  zIndex: "9999999999999999999999999 !important",
-                },
-                className: "!border !shadow-none !px-5",
-                success: {
-                  iconTheme: {
-                    primary: "#3bb77e",
-                  },
-                },
-              }}
-            />
-            <ScrollToTop />
-            <HideWrapper toHide={`/admin`}>
-              <BottomBar />
-              <Footer />
-            </HideWrapper>
-          </TanstackQuery>
+          <ShopContextProvider>
+            <TooltipProvider>
+              <TanstackQuery>
+                <HideWrapper toHide={`/admin`}>
+                  <Header />
+                </HideWrapper>
+                <StepProvider>{children}</StepProvider>
+                <Toaster
+                  position="center-top"
+                  toastOptions={{
+                    style: {
+                      zIndex: "9999999999999999999999999 !important",
+                    },
+                    className: "!border !shadow-none !px-5",
+                    success: {
+                      iconTheme: {
+                        primary: "#3bb77e",
+                      },
+                    },
+                  }}
+                />
+                <ScrollToTop />
+                <HideWrapper toHide={`/admin`}>
+                  <BottomBar />
+                  <Footer />
+                </HideWrapper>
+              </TanstackQuery>
+            </TooltipProvider>
+          </ShopContextProvider>
         </ReProgressProviders>
       </body>
     </html>

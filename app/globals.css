@@ -79,6 +79,9 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+  .theme {
+    --animate-shine: shine var(--duration) infinite linear;
+  }
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -250,4 +253,22 @@ span.swiper-pagination-bullet {
 ::selection {
   background: #3bb77e;
   color: #fff;
+}
+
+@theme inline {
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
+  }
+}
+
+.shadowText {
+  text-shadow: #253d4e 2px 2px 15px;
 }

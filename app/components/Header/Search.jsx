@@ -16,6 +16,7 @@ export default function Search() {
             <GrSearch size={22} />
           </button>
         </div>
+        {/* <div className=" bg-white  border-primary/40 rounded-lg h-20 border -mb-20 z-48 translate-y-3 relative"></div> */}
       </form>
     </>
   );

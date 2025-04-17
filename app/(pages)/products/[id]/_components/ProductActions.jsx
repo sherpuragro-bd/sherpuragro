@@ -1,7 +1,9 @@
 "use client";
 
+import { ShopContext } from "@/app/context/ShopContext";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
@@ -11,10 +13,13 @@ import {
 import { generateWhatsAppLink } from "@/lib/utils";
 import { Minus, Plus, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { FaWhatsapp } from "react-icons/fa";
 
 const ProductActions = ({ data }) => {
+  const { addItemToCart } = useContext(ShopContext);
+
   const minQty =
     typeof data?.minQuantity === "number" && data.minQuantity >= 0
       ? data.minQuantity
@@ -53,7 +58,7 @@ const ProductActions = ({ data }) => {
       </div>
     </div>
   ) : (
-    <div className="md:static flex flex-wrap  justify-between items-center gap-3 fixed max-[350px]:flex-col w-full max-[350px]:bottom-12 bottom-20 bg-white left-0 px-5 py-2 z-[999999]">
+    <div className="md:static flex flex-wrap  justify-between items-center gap-3 fixed max-[350px]:flex-col w-full max-[350px]:bottom-12 bottom-20 bg-white left-0 px-5 md:px-0 py-2 z-[999999]">
       <div className="w-full flex h-20 -mt-20 -mb-5  bg-gradient-to-b from-transparent to-white fixed bottom-[10rem] md:hidden"></div>
       <ProductCart
         stock={data.stock}
@@ -69,7 +74,7 @@ const ProductActions = ({ data }) => {
               অর্ডার করুন
             </div>
           </DialogTrigger>
-          <DialogContent className="w-60 rounded-xl min-[350px]:w-80 z-[999999999999999999999999999999999999999999999999999999999999999999999999999999999999]">
+          <DialogContent className="w-60 rounded-xl min-[350px]:w-80">
             <div className="space-y-1">
               <DialogTitle>অর্ডার এর মাধ্যম</DialogTitle>
               <DialogDescription>
@@ -77,9 +82,21 @@ const ProductActions = ({ data }) => {
               </DialogDescription>
             </div>
             <div className="space-y-2">
-              <button className="px-5 flex justify-center items-center gap-2 py-2 bg-slate-100 border rounded-md w-full">
+              <DialogClose
+                onClick={() => {
+                  addItemToCart({
+                    name: data.name,
+                    price: data.discountPrice || data.price,
+                    quantity: cartQuantity,
+                    image: data.images[0],
+                    permalLink: data.permalLink,
+                  });
+                  toast.success("প্রোডাক্ট টি কার্টে অ্যাড করা হয়েছে");
+                }}
+                className="px-5 flex justify-center items-center gap-2 py-2 bg-slate-100 border rounded-md w-full"
+              >
                 <ShoppingBasket size={20} /> কার্টে অ্যাড করুন
-              </button>
+              </DialogClose>
               <Link
                 target="_blank"
                 className="flex"
@@ -98,7 +115,19 @@ const ProductActions = ({ data }) => {
             </div>
           </DialogContent>
         </Dialog>
-        <button className="px-5 z-40 max-[450px]:text-sm py-2 border border-text max-[450px]:flex-grow bg-text text-white rounded-md">
+        <button
+          onClick={() => {
+            addItemToCart({
+              name: data.name,
+              price: data.discountPrice || data.price,
+              quantity: cartQuantity,
+              image: data.images[0],
+              permalLink: data.permalLink,
+            });
+            toast.success("প্রোডাক্ট টি কার্টে অ্যাড করা হয়েছে");
+          }}
+          className="px-5 z-40 max-[450px]:text-sm py-2 border border-text max-[450px]:flex-grow bg-text text-white rounded-md"
+        >
           অ্যাড টু কার্ট
         </button>
       </div>

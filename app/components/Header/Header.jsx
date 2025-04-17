@@ -15,6 +15,7 @@ import NavLink from "../ui/NavLink";
 import HeaderCategoryDropdown from "./HeaderCategoryDropdown";
 import { Suspense } from "react";
 import MobileDropdown from "./MobileDropdown";
+import { ShopContextProvider } from "@/app/context/ShopContext";
 
 export default async function Header() {
   const session = await getServerSession();

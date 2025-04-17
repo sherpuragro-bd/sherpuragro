@@ -10,22 +10,128 @@ import {
 } from "@/components/ui/popover";
 import Image from "next/image";
 import {
+  ArrowRight,
   LogIn,
   LogOut,
   MapPin,
+  MoveRight,
   SlidersHorizontal,
   Table2,
   User,
   UserPlus,
+  X,
 } from "lucide-react";
 import { logoutUser } from "@/actions/auth/login";
+import { useContext, useEffect } from "react";
+import { ShopContext } from "@/app/context/ShopContext";
+import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
+import { TooltipContent } from "@radix-ui/react-tooltip";
+import { convertToBengaliNumbers } from "@/lib/utils";
 
 export default function IconTray({ user, avatar, userData }) {
+  const { cartItems, removeItemFromCart } = useContext(ShopContext);
+
   return (
     <>
       <div className="flex items-center gap-5">
         <Compare />
-        <Cart />
+        <Tooltip delayDuration={100}>
+          <TooltipTrigger>
+            <Cart count={cartItems?.length} />
+          </TooltipTrigger>
+          <TooltipContent
+            side="bottom"
+            className="max-w-80 border p-3 flex drop-shadow-xl flex-col gap-2 bg-white mt-3 rounded-md"
+          >
+            {cartItems?.length > 0 ? (
+              <>
+                {cartItems?.slice(0, 5).map((cartItem, index) => (
+                  <div
+                    className="flex gap-2 justify-between w-full"
+                    key={index}
+                  >
+                    <div className="flex gap-2">
+                      <Link href={`/products/${cartItem.permalLink}`}>
+                        <Image
+                          src={cartItem.image}
+                          width={40}
+                          height={40}
+                          className="rounded-sm"
+                          alt={cartItem.name}
+                        />
+                      </Link>
+                      <div className="flex flex-col">
+                        <Link
+                          className="text-xs hover:text-primary transition-all font-light"
+                          href={`/products/${cartItem.permalLink}`}
+                        >
+                          {cartItem.name?.slice(0, 25)}{" "}
+                          {cartItem.name.length > 25 && "..."}
+                        </Link>
+                        <span className="text-xs text-neutral-600 font-light">
+                          {convertToBengaliNumbers(cartItem.quantity)} x{" "}
+                          {convertToBengaliNumbers(
+                            Number(cartItem.quantity) * Number(cartItem.price)
+                          )}{" "}
+                          ৳
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        removeItemFromCart(cartItem.permalLink);
+                      }}
+                      className="bg-red-500/30 border-red-500/40 text-red-500  opacity-50 border rounded-sm w-fit h-fit"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <p className="font-light text-sm">কার্ট এ কোন প্রোডাক্ট নেই</p>
+            )}
+            {cartItems?.length > 5 && (
+              <p className="w-full text-center text-xs font-light">
+                {/* prettier-ignore */}
+                কার্টের {convertToBengaliNumbers(cartItems.length)}
+                {"টি প্রোডাক্টের মধ্যে ৫টি এখানে"}
+              </p>
+            )}
+            {cartItems?.length > 0 && (
+              <>
+                <div className="w-full mt-2">
+                  <li className="text-sm flex w-full justify-between">
+                    <span>মোট </span>
+                    <span className="text-neutral-400 font-light">
+                      {convertToBengaliNumbers(
+                        cartItems?.reduce(
+                          (total, item) => total + item.price * item.quantity,
+                          0
+                        )
+                      )}
+                      ৳
+                    </span>
+                  </li>
+                </div>
+                <div className="w-full flex pt-2 justify-between items-center gap-2">
+                  <button className="bg-primary  flex items-center gap-2 border border-primary text-white px-3 py-1 text-sm font-extralight rounded-md hover:bg-primary/80 transition-all">
+                    কার্ট দেখুন
+                  </button>
+                  <button className="border-primary group ring-4 w-20 flex justify-center ring-primary/30 shadowText text-sm text-white font-extralight bg-gradient-to-b from-primary/80 overflow-hidden hover:ring-primary/40 to-primary/50 px-3 rounded-md border py-1">
+                    <span className="group-hover:opacity-0 transition-all">
+                      চেকআউট
+                    </span>{" "}
+                    <MoveRight
+                      className=" -translate-x-14 group-hover:translate-x-0 transition-all -mt-[1px] absolute"
+                      strokeWidth={1}
+                    />
+                  </button>
+                </div>
+              </>
+            )}
+          </TooltipContent>
+        </Tooltip>
         <Account userData={userData} avatar={avatar} user={user} />
       </div>
     </>
@@ -64,7 +170,7 @@ const Compare = ({ count = 0 }) => {
 
 export const Cart = ({ count = 0 }) => {
   return (
-    <Link href={"/cart"} className="flex items-end gap-2">
+    <Link href={"#cart"} className="flex items-end gap-2">
       <div>
         <span className="font-en bg-primary z-10 relative text-white scale-75 font-medium p-1 -mb-3 translate-x-2 justify-center items-center flex rounded-full text-sm">
           {count}
