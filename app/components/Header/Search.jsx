@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GrSearch } from "react-icons/gr";
 
 export default function Search() {
@@ -18,6 +18,7 @@ export default function Search() {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const router = useRouter();
+  const searchRef = useRef(null); // for detecting outside clicks
 
   // Debounce effect
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Search() {
 
     const delayDebounce = setTimeout(() => {
       setDebouncedSearch(search);
-    }, 200); // Wait 500ms after typing ends
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
   }, [search]);
@@ -39,13 +40,25 @@ export default function Search() {
       if (debouncedSearch.length === 0) return;
       setIsFetching(true);
       setIsSearching(true);
-      const products = await searchProducts(debouncedSearch);
+      const products = await searchProducts(debouncedSearch.trim());
       setFilteredProducts(products || []);
       setIsFetching(false);
     };
 
     fetchSearchResults();
   }, [debouncedSearch]);
+
+  // Detect click outside of the search dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearching(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <form
@@ -54,6 +67,7 @@ export default function Search() {
         router.push(`/products?query=${search}`);
       }}
       className="w-6/12 hidden md:block"
+      ref={searchRef}
     >
       <div className="relative">
         <div className="px-5 flex items-center border py-[5px] focus-within:border-primary/50 transition-all rounded-md">
@@ -71,6 +85,7 @@ export default function Search() {
         <AnimatePresence>
           {isSearching && (
             <motion.div
+              onClick={() => setIsSearching(false)}
               animate={{ translateY: 8, opacity: 1 }}
               initial={{ opacity: 0 }}
               exit={{ opacity: 0 }}
@@ -80,7 +95,7 @@ export default function Search() {
                 <>
                   {filteredProducts.map((product) => (
                     <Link
-                      href={`/product/${product.permalLink}`}
+                      href={`/products/${product.permalLink}`}
                       key={product._id}
                       className="flex gap-3"
                     >
