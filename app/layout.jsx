@@ -26,6 +26,9 @@ const quicksand = Quicksand({
 export const metadata = {
   title: "শেরপুর এগ্রো",
   description: "শেরপুর এগ্রো বাংলাদেশি একটি এগ্রো প্লাটফর্ম",
+  other: {
+    "google-site-verification": "eARedgB_T6Jl1dDzWiy9XG9wjm_dTe0pBlYokcqF0w4",
+  },
 };
 
 export default function RootLayout({ children }) {
