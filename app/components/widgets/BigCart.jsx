@@ -20,7 +20,7 @@ const BigCart = () => {
   return (
     <>
       <SheetContent
-        className={`z-[999999999999999999999999999] max-[450px]:w-full`}
+        className={`!z-[999999999999999999999999999] max-[450px]:w-full `}
       >
         <SheetTitle>কার্ট</SheetTitle>
         <SheetDescription>
@@ -37,7 +37,7 @@ const BigCart = () => {
             </div>
           )}
           {cartItems?.length > 0 && (
-            <div className="flex w-full h-full flex-col items-center gap-3 overflow-y-scroll mt-5">
+            <div className="flex w-full h-full flex-col items-center gap-3 overflow-y-scroll [&::-webkit-scrollbar]:w-0 mt-5">
               {cartItems?.map((item, index) => (
                 <div
                   key={index}
@@ -112,9 +112,9 @@ const BigCart = () => {
         <SheetFooter className={` bottom-0 w-full pb-5 absolute`}>
           {cartItems?.length > 0 ? (
             <>
-              <li className="text-sm flex w-full justify-between mb-2 pr-10">
+              <li className="text-lg flex w-full justify-between mb-2 pr-10">
                 <span>মোট </span>
-                <span className="text-neutral-400 font-light">
+                <span className="text-neutral-600 font-light">
                   {convertToBengaliNumbers(
                     cartItems?.reduce(
                       (total, item) => total + item.price * item.quantity,

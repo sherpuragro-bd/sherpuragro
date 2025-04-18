@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 import { FaWhatsapp } from "react-icons/fa";
 
 const ProductActions = ({ data }) => {
-  const { addItemToCart } = useContext(ShopContext);
+  const { cartItems, addItemToCart } = useContext(ShopContext);
 
   const minQty =
     typeof data?.minQuantity === "number" && data.minQuantity >= 0
@@ -84,6 +84,13 @@ const ProductActions = ({ data }) => {
             <div className="space-y-2">
               <DialogClose
                 onClick={() => {
+                  const item = cartItems.find(
+                    (item) => item.permalLink === data.permalLink
+                  );
+                  if (item) {
+                    toast.error("প্রোডাক্ট টি ইতিমধ্যে কার্টে আছে");
+                    return;
+                  }
                   addItemToCart({
                     name: data.name,
                     price: data.discountPrice || data.price,
@@ -117,6 +124,13 @@ const ProductActions = ({ data }) => {
         </Dialog>
         <button
           onClick={() => {
+            const item = cartItems.find(
+              (item) => item.permalLink === data.permalLink
+            );
+            if (item) {
+              toast.error("প্রোডাক্ট টি ইতিমধ্যে কার্টে আছে");
+              return;
+            }
             addItemToCart({
               name: data.name,
               price: data.discountPrice || data.price,

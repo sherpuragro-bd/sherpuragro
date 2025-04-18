@@ -26,6 +26,8 @@ import { ShopContext } from "@/app/context/ShopContext";
 import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 import { convertToBengaliNumbers } from "@/lib/utils";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import BigCart from "../widgets/BigCart";
 
 export default function IconTray({ user, avatar, userData }) {
   const { cartItems, removeItemFromCart } = useContext(ShopContext);
@@ -36,11 +38,16 @@ export default function IconTray({ user, avatar, userData }) {
         <Compare />
         <Tooltip delayDuration={100}>
           <TooltipTrigger>
-            <Cart count={cartItems?.length} />
+            <Sheet>
+              <SheetTrigger>
+                <Cart count={cartItems?.length} />
+              </SheetTrigger>
+              <BigCart />
+            </Sheet>
           </TooltipTrigger>
           <TooltipContent
             side="bottom"
-            className="max-w-80 border p-3 flex drop-shadow-xl flex-col gap-2 bg-white mt-3 rounded-md"
+            className="max-w-80 z-[9999999999999999999999999999] border p-3 flex drop-shadow-xl flex-col gap-2 bg-white mt-3 rounded-md"
           >
             {cartItems?.length > 0 ? (
               <>
@@ -114,18 +121,17 @@ export default function IconTray({ user, avatar, userData }) {
                   </li>
                 </div>
                 <div className="w-full flex pt-2 justify-between items-center gap-2">
-                  <button className="bg-primary  flex items-center gap-2 border border-primary text-white px-3 py-1 text-sm font-extralight rounded-md hover:bg-primary/80 transition-all">
-                    কার্ট দেখুন
-                  </button>
-                  <button className="border-primary group ring-4 w-20 flex justify-center ring-primary/30 shadowText text-sm text-white font-extralight bg-gradient-to-b from-primary/80 overflow-hidden hover:ring-primary/40 to-primary/50 px-3 rounded-md border py-1">
-                    <span className="group-hover:opacity-0 transition-all">
-                      চেকআউট
-                    </span>{" "}
-                    <MoveRight
-                      className=" -translate-x-14 group-hover:translate-x-0 transition-all -mt-[1px] absolute"
-                      strokeWidth={1}
-                    />
-                  </button>
+                  <Link href={`/checkout`} className="flex w-full">
+                    <button className="border-primary w-full group ring-4 flex justify-center ring-primary/30 shadowText text-sm text-white font-extralight bg-gradient-to-b from-primary/80 overflow-hidden hover:ring-primary/40 to-primary/50 px-3 rounded-md border py-1">
+                      <span className="group-hover:opacity-0 transition-all">
+                        চেকআউট
+                      </span>{" "}
+                      <MoveRight
+                        className=" -translate-x-60 group-hover:translate-x-0 transition-all -mt-[1px] absolute"
+                        strokeWidth={1}
+                      />
+                    </button>
+                  </Link>
                 </div>
               </>
             )}
