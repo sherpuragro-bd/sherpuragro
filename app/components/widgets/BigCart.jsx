@@ -19,9 +19,7 @@ const BigCart = () => {
 
   return (
     <>
-      <SheetContent
-        className={`!z-[999999999999999999999999999] max-[450px]:w-full `}
-      >
+      <SheetContent className={`max-[450px]:w-full `}>
         <SheetTitle>কার্ট</SheetTitle>
         <SheetDescription>
           আপনার অ্যাড করা সকল প্রোডাক্ট এই কার্ট এর মধ্যে রয়েছে

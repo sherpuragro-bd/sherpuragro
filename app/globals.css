@@ -272,3 +272,7 @@ span.swiper-pagination-bullet {
 .shadowText {
   text-shadow: #253d4e 2px 2px 15px;
 }
+
+div#radix-\:r1\: {
+  z-index: 999999999999999;
+}
