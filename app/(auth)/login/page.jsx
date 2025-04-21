@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import LoginForm from "./LoginForm";
 
 export const metadata = {
@@ -10,7 +11,9 @@ export default function Login() {
   return (
     <section className="flex justify-center">
       <div className="w-full max-w-primary px-5 items-center justify-center py-40 inline-flex">
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
       </div>
     </section>
   );

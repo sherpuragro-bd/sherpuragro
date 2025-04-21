@@ -6,13 +6,15 @@ import LineErro from "@/app/components/ui/LineErro";
 import SocialLogin from "@/app/components/ui/SocialLogin";
 import { Loader2, Lock, LockIcon, Mail, MoveRight } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 export default function LoginForm() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const router = useRouter();
   const [isLogining, setIsLogining] = useState(false);
 
@@ -29,7 +31,11 @@ export default function LoginForm() {
 
     if (res.success) {
       toast.success("লগইন সফল হয়েছে");
-      router.refresh();
+      if (redirect) {
+        window.location.href = redirect;
+      } else {
+        router.refresh();
+      }
       return;
     } else {
       reset(),
@@ -122,7 +128,7 @@ export default function LoginForm() {
       <br />
       <hr />
       <br />
-      <SocialLogin />
+      <SocialLogin redirect={redirect || null} />
     </form>
   );
 }

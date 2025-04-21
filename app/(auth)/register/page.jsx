@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import RegisterForm from "./RegisterForm";
 
 export const metadata = {
@@ -11,7 +12,9 @@ export default function Register() {
     <>
       <section className="flex justify-center">
         <div className="w-full max-w-primary px-5 items-center justify-center py-40 inline-flex">
-          <RegisterForm />
+          <Suspense>
+            <RegisterForm />
+          </Suspense>
         </div>
       </section>
     </>

@@ -272,10 +272,6 @@ span.swiper-pagination-bullet {
 .shadowText {
   text-shadow: #253d4e 2px 2px 15px;
 }
-
-div#radix-\:r1\: {
-  z-index: 999999999999999999999999999999999999999999999999999999;
-}
-#radix-\:r8\: {
-  z-index: 99999999999999999;
+#dilogsheet {
+  z-index: 989898989898989898989 !important;
 }

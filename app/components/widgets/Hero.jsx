@@ -9,7 +9,7 @@ export default function Hero() {
       <section className="flex justify-center w-full md:mt-7">
         <div className="max-w-primary w-full flex gap-5 md:px-5 justify-between">
           <HeroCategories />
-          <div className="min-[1008px]:w-[83%] flex m-0 overflow-hidden w-full border border-t-0 md:border-t md:rounded-2xl">
+          <div className="min-[1008px]:w-[83%]  mx-5 mt-5 flex m-0 overflow-hidden w-full border border-t-0 md:border-t rounded-2xl">
             <Suspense
               fallback={
                 <>

@@ -122,7 +122,7 @@ const BigCart = () => {
                   ৳
                 </span>
               </li>
-              <Link className="flex w-full pr-10" href={`/`}>
+              <Link className="flex w-full pr-10" href={`/checkout`}>
                 <button className="bg-gradient-to-br from-primary text-white px-5 w-full py-2 to-primary/50 border border-primary rounded-md ring-4 ring-primary/20">
                   চেকআউট করুন
                 </button>

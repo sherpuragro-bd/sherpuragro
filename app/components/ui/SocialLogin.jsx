@@ -3,14 +3,23 @@
 import { socialSignIn } from "@/actions/auth/socialSignIn";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
+import { useSearchParams } from "next/navigation";
 
 export default function SocialLogin() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const handleGoogleSignIn = async (method) => {
     try {
       if (method === "google") {
-        await socialSignIn({ method: "google", callBack: "/account" });
+        await socialSignIn({
+          method: "google",
+          callBack: `/${redirect || "account"}`,
+        });
       } else if (method === "facebook") {
-        await socialSignIn({ method: "facebook", callBack: "/account" });
+        await socialSignIn({
+          method: "facebook",
+          callBack: `/${redirect || "account"}`,
+        });
       } else {
         return;
       }

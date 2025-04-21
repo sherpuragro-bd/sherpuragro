@@ -4,7 +4,7 @@ const ExitWarning = () => {
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
-      event.returnValue = ""; // This triggers the browser's confirmation dialog
+      event.returnValue = "";
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);

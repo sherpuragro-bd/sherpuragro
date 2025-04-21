@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
             ))}
           </div>
           <Link href={`/products/${product._doc.permalLink}`}>
-            <h2 className="hover:text-primary transition-all">
+            <h2 className="hover:text-primary mt-1 leading-5 transition-all">
               {product._doc.name.slice(0, 100)}
               {product._doc.name.length > 100 && "..."}
             </h2>

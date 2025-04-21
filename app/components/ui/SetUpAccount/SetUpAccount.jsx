@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import {
-  ArrowRight,
   Calendar,
   CircleHelp,
   Key,
@@ -16,10 +15,12 @@ import { useForm } from "react-hook-form";
 import LineErro from "../LineErro";
 import { registerUser } from "@/actions/auth/auth";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useNextStep } from "nextstepjs";
 
 export default function SetUpAccount({ user, session }) {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const [isRegistering, setIsRegistering] = useState(false);
   const { user: AuthUser } = session;
   const [number, setNumber] = useState("");
@@ -72,7 +73,7 @@ export default function SetUpAccount({ user, session }) {
     }
 
     setIsRegistering(false);
-    router.refresh();
+    window.location.href = `/${redirect || `account`}`;
     toast.success("অভিনন্দন প্রোফাইল সেটআপ সফল হয়েছে");
   };
 
