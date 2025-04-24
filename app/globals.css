@@ -210,6 +210,10 @@ span.swiper-pagination-bullet {
   font-size: 0.83em;
   line-height: 1.6;
 }
+.jodit-workplace iframe {
+  border: 1px solid #73737331;
+  padding: 10px;
+}
 
 .jodit-workplace h6 {
   font-size: 0.67em;
@@ -274,4 +278,8 @@ span.swiper-pagination-bullet {
 }
 #dilogsheet {
   z-index: 989898989898989898989 !important;
+}
+
+#dialog-content {
+  z-index: 999999999999999 !important;
 }

@@ -2,6 +2,7 @@
 
 import { ShopContext } from "@/app/context/ShopContext";
 import {
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -52,7 +53,7 @@ const BigCart = () => {
                     <div className="ml-4 w-full">
                       <Link
                         href={`/products/${item.permalLink}`}
-                        className="text-lg leading-none hover:text-primary transition-all font-medium"
+                        className="text-lg leading-none hover:text-primary transition-all font-normal"
                       >
                         {item.name?.slice(0, 20)}...
                       </Link>
@@ -123,9 +124,11 @@ const BigCart = () => {
                 </span>
               </li>
               <Link className="flex w-full pr-10" href={`/checkout`}>
-                <button className="bg-gradient-to-br from-primary text-white px-5 w-full py-2 to-primary/50 border border-primary rounded-md ring-4 ring-primary/20">
-                  চেকআউট করুন
-                </button>
+                <SheetClose className="w-full">
+                  <button className="bg-gradient-to-br font-light from-primary text-white px-5 w-full py-2 to-primary/50 border border-primary rounded-md ring-4 ring-primary/20">
+                    চেকআউট করুন
+                  </button>
+                </SheetClose>
               </Link>
             </>
           ) : (

@@ -15,7 +15,7 @@ import NavLink from "../ui/NavLink";
 import HeaderCategoryDropdown from "./HeaderCategoryDropdown";
 import { Suspense } from "react";
 import MobileDropdown from "./MobileDropdown";
-import { ShopContextProvider } from "@/app/context/ShopContext";
+import OffersIcon from "../../../public/img/gift.png";
 
 export default async function Header() {
   const session = await getServerSession();
@@ -104,6 +104,26 @@ export default async function Header() {
                   <Suspense fallback={<></>}>
                     <HeaderCategoryDropdown />
                   </Suspense>
+                </li>
+                <li className="flex order-3 items-center gap-1 cursor-pointer group">
+                  <Link
+                    href={"/offers"}
+                    className="bg-red-600/20 px-2 flex flex-col items-end hover:bg-red-500/30 text-red-500 rounded-sm"
+                  >
+                    <span className="relative flex size-2.5 left-2 -mb-2 -translate-y-1">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-600 opacity-75"></span>
+                      <span className="relative inline-flex size-2.5 rounded-full bg-red-500"></span>
+                    </span>
+                    <span className="flex py-[2px] gap-[6px] items-center">
+                      <Image
+                        src={OffersIcon}
+                        width={18}
+                        height={18}
+                        alt="Offers"
+                      />
+                      অফারস
+                    </span>
+                  </Link>
                 </li>
               </ul>
             </div>

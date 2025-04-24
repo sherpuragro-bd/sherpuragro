@@ -8,7 +8,10 @@ export const getProductDetails = async (permalLink) => {
   try {
     await connectToDB();
 
-    const product = await ProductModel.findOne({ permalLink }).lean();
+    const product = await ProductModel.findOne({
+      permalLink,
+      status: "published",
+    }).lean();
 
     if (!product) return null;
 

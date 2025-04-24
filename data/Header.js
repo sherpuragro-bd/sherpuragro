@@ -14,10 +14,6 @@ export const HeaderDefaultNavs = [
     pathName: "কিনুন",
   },
   {
-    path: "/offers",
-    pathName: "অফারস",
-  },
-  {
     path: "/blog",
     pathName: "ব্লগ",
   },

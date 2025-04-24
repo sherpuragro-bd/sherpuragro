@@ -31,3 +31,40 @@ export const getAllPopularProducts = async () => {
     errorHandeler();
   }
 };
+
+export const getAllProductDataForAdmin = async () => {
+  try {
+    await connectToDB();
+
+    const totalProducts = await ProductModel.countDocuments();
+    const products = await ProductModel.find()
+      .select(
+        "name _id permalLink images stock price discountPrice status createdAt updatedAt"
+      )
+      .lean();
+    return replaceMongoIdInArray(products);
+  } catch (err) {
+    errorHandeler(err);
+    return null;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    await connectToDB();
+    await ProductModel.findByIdAndDelete(id);
+    return { success: true, msg: "প্রোডাক্টি সফলভাবে ডিলিট হয়েছে" };
+  } catch {
+    errorHandeler();
+  }
+};
+
+export const deleteManyProducts = async (ids) => {
+  try {
+    await connectToDB();
+    await ProductModel.deleteMany({ _id: { $in: ids } });
+    return { success: true, msg: "প্রোডাক্টস সফলভাবে ডিলিট হয়েছে" };
+  } catch {
+    errorHandeler();
+  }
+};
