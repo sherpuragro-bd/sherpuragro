@@ -20,9 +20,7 @@ export const getUser = async (req) => {
   if (referer) {
     try {
       pathname = new URL(referer).pathname;
-    } catch (error) {
-      console.error("Invalid referer URL:", error);
-    }
+    } catch (error) {}
   }
 
   const session = await getServerSession();

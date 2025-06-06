@@ -40,7 +40,7 @@ export default function HomeSlider({ data }) {
           <SwiperSlide
             onMouseEnter={() => sliderRef.current.swiper.autoplay.stop()}
             onMouseLeave={() => sliderRef.current.swiper.autoplay.start()}
-            key={slider.id}
+            key={slider?.id || `slider-${index}`}
             style={{
               "--desktop-bg": `url(${slider.bannerDesk})`,
               "--tablet-bg": slider.bannerTablet

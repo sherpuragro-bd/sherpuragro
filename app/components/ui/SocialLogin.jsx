@@ -23,9 +23,7 @@ export default function SocialLogin() {
       } else {
         return;
       }
-    } catch (error) {
-      console.error("Sign-in error:", error);
-    }
+    } catch (error) {}
   };
 
   return (

@@ -3,7 +3,11 @@
 import CategoryModel from "@/models/category.model";
 import { getUser } from "../user";
 import { connectToDB } from "@/lib/connectToDB";
-import { errorHandeler, replaceMongoIdInArray } from "@/lib/utils";
+import {
+  convertMongoIdsInArray,
+  errorHandeler,
+  replaceMongoIdInArray,
+} from "@/lib/utils";
 import { unstable_cache } from "next/cache";
 
 export const newCategoryAction = async (data) => {
@@ -24,11 +28,10 @@ export const getAllCategories = async (remove, filter) => {
       .lean()
       .select("-descriptionCategory -publicity -seoDescription -seoTitle");
 
-    return await replaceMongoIdInArray(
+    return convertMongoIdsInArray(
       allCategories?.sort(
         (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)
-      ),
-      remove
+      )
     );
   } catch (err) {
     return errorHandeler();

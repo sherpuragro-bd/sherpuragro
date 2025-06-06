@@ -15,9 +15,7 @@ const ProductQr = () => {
       try {
         const qrCode = await QRCode.toDataURL(currentUrl);
         setQrCodeUrl(qrCode);
-      } catch (error) {
-        console.error("Error generating QR code:", error);
-      }
+      } catch (error) {}
     };
 
     generateQRCode();

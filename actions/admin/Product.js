@@ -1,7 +1,11 @@
 "use server";
 
 import { connectToDB } from "@/lib/connectToDB";
-import { errorHandeler, replaceMongoIdInArray } from "@/lib/utils";
+import {
+  convertMongoIdsInArray,
+  errorHandeler,
+  replaceMongoIdInArray,
+} from "@/lib/utils";
 import ProductModel from "@/models/product.model";
 
 export const createNewProduct = async (payload) => {
@@ -42,7 +46,7 @@ export const getAllProductDataForAdmin = async () => {
         "name _id permalLink images stock price discountPrice status createdAt updatedAt"
       )
       .lean();
-    return replaceMongoIdInArray(products);
+    return convertMongoIdsInArray(products);
   } catch (err) {
     errorHandeler(err);
     return null;

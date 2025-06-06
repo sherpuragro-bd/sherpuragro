@@ -20,9 +20,7 @@ export default function HeroCategories() {
         localStorage.setItem("categories", JSON.stringify(res));
         setAllCategories(res);
       }
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -32,15 +30,17 @@ export default function HeroCategories() {
   return (
     <div className="w-52 max-[1008px]:hidden flex border text-text/80 flex-col gap-3 border-primary/40 font-normal p-5 rounded-xl">
       {allCategories.length > 0
-        ? allCategories?.slice(0, expand).map((category) => (
-            <Link
-              href={`/categories/${category.permalLink}`}
-              className="hover:underline"
-              key={`category-${category.id}`}
-            >
-              {category?.nameCategory}
-            </Link>
-          ))
+        ? allCategories?.slice(0, expand).map((category) => {
+            return (
+              <Link
+                href={`/categories/${category.permalLink}`}
+                className="hover:underline"
+                key={`category-${category._id}`}
+              >
+                {category?.nameCategory}
+              </Link>
+            );
+          })
         : Array.from({ length: 12 }).map((_, index) => (
             <Skeleton key={index} className="w-full h-6" />
           ))}

@@ -2,9 +2,13 @@
 
 import { AdminContext } from "@/app/context/AdminContext";
 import CheckBox from "@/components/ui/CheckBox";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const BulkDelete = ({ id }) => {
+  useEffect(() => {
+    setselectedProducts([]);
+  }, []);
+
   const { setselectedProducts, selectedProducts } = useContext(AdminContext);
 
   const isTicked = selectedProducts?.includes(id);
@@ -16,7 +20,6 @@ const BulkDelete = ({ id }) => {
       setselectedProducts((prev) => [...prev, id]);
     }
   };
-
   return (
     <button onClick={handleClick}>
       <CheckBox ticked={isTicked} />

@@ -2,6 +2,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { convertToBengaliNumbers } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import AddToCartBtn from "./AddToCartBtn";
 
 const ProductCard = ({ product }) => {
   return (
@@ -62,6 +63,7 @@ const ProductCard = ({ product }) => {
               </span>
             )}
           </div>
+          <AddToCartBtn data={product} />
         </div>
       </div>
     </div>

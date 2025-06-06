@@ -34,12 +34,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" data-arp="" className="scroll-smooth">
       <body
         id="body"
         className={`${liAdorNoirrit.className} antialiased text-1 bg-white [&::-webkit-scrollbar]:w-0`}
         data-gr-ext-installed=""
-        data-new-gr-c-s-check-loaded="14.1232.0"
+        data-new-gr-c-s-check-loaded="14.1238.0"
       >
         <ReProgressProviders>
           <AdminContextProvider>
@@ -54,7 +54,8 @@ export default function RootLayout({ children }) {
                     position="center-top"
                     toastOptions={{
                       style: {
-                        zIndex: "9999999999999999999999999 !important",
+                        zIndex:
+                          "99999999999999999999999999999999999999999999999999999999999999 !important",
                       },
                       className: "!border !shadow-none !px-5",
                       success: {

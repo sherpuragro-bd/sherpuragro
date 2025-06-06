@@ -62,9 +62,7 @@ const Footer = () => {
         href: `/categories/${category.permalLink}`,
       }));
       setallCategories(newMappedCategories);
-    } catch (error) {
-      console.error("Error parsing categories:", error);
-    }
+    } catch (error) {}
   }, []);
 
   return (
@@ -190,7 +188,7 @@ const Footer = () => {
               >
                 <div className="w-[40px] flex justify-center items-center">
                   <svg
-                    height="30ox"
+                    height="30px"
                     width="30px"
                     version="1.1"
                     className="ml-2"

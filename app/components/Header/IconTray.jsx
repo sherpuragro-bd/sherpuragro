@@ -37,7 +37,7 @@ export default function IconTray({ user, avatar, userData }) {
       <div className="flex items-center gap-5">
         <Compare />
         <Tooltip delayDuration={100}>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Sheet>
               <SheetTrigger>
                 <Cart count={cartItems?.length} />

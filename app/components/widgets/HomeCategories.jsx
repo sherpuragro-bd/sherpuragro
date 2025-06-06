@@ -10,7 +10,6 @@ import LoadingPlaceholder from "../../../public/img/placeholder.png";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import HomeCategorieSkeleton from "../ui/HomeCategorieSkeleton";
 
 export default function HomeCategories({ data }) {
   const categorySliderRef = useRef();

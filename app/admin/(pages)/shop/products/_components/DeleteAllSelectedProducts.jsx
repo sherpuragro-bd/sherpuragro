@@ -40,17 +40,17 @@ const DeleteAllSelectedProducts = () => {
       <DialogTrigger className={`flex`}>
         <div
           className={`flex items-center gap-2 px-3 rounded-md text-white ${
-            selectedProducts.length > 0
+            selectedProducts?.length > 0
               ? "cursor-pointer bg-red-500 "
               : "cursor-not-allowed bg-red-400"
           }`}
-          disabled={selectedProducts.length > 0}
+          disabled={selectedProducts?.length > 0}
         >
           {" "}
           <Trash size={20} /> ডিলিট করুন
         </div>
       </DialogTrigger>
-      {selectedProducts.length > 0 && (
+      {selectedProducts?.length > 0 && (
         <DialogContent>
           <DialogTitle>সিলেক্টেড প্রোডাক্টস ডিলিট</DialogTitle>
           <DialogDescription>
