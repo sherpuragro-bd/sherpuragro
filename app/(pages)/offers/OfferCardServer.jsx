@@ -5,6 +5,7 @@ import React from "react";
 import RibonImg from "../../../public/img/ribon.png";
 import RibbonDesign from "../../../public/img/ribondesign.png";
 import CopyToClipBoard from "./CopyToClipBoard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const colorVariants = [
   {
@@ -35,7 +36,6 @@ const colorVariants = [
 
 const OfferCardServer = async () => {
   const offers = await getOffers();
-  console.log(offers);
 
   return (
     <>
@@ -120,3 +120,45 @@ const OfferCardServer = async () => {
 };
 
 export default OfferCardServer;
+
+export function OfferCardSkeleton({ index }) {
+  const variant = colorVariants[index % colorVariants.length];
+
+  return (
+    <div
+      className={`gap-5 relative col-span-12 sm:col-span-6 lg:col-span-4 flex flex-col border ${variant.border} ${variant.bg} rounded-2xl `}
+    >
+      {/* White Ribbon Circles */}
+      <div className="flex w-full absolute inset-0 items-center justify-between">
+        <span className="w-9 h-9 rounded-full bg-white relative -left-6" />
+        <span className="w-9 h-9 rounded-full bg-white relative left-6" />
+      </div>
+
+      <div className="w-full flex">
+        {/* Colored left section */}
+        <div
+          className={`py-8 ${variant.innerBg} w-5/12 flex justify-center items-center rounded-l-[14px]`}
+        >
+          <Skeleton className={`h-8 w-16 ${variant.text}`} />
+        </div>
+
+        {/* Ribbon image skeleton */}
+        <div className="w-2 h-full relative max-[300px]:hidden">
+          <Skeleton className="w-full bg-gradient-to-br from-yellow-500 to-yellow-300 h-full absolute rounded-none" />
+        </div>
+
+        {/* Decorative ribbon design image skeleton */}
+        <div className="flex items-center h-full -ml-7 z-20 max-[300px]:hidden">
+          {/* <Skeleton className="w-[50px] h-[50px] rounded-full" /> */}
+          <Image src={RibbonDesign} width={50} height={50} alt="Offer Ribon" />
+        </div>
+
+        {/* Text content area */}
+        <div className="p-3 z-20 relative flex flex-col gap-2">
+          <Skeleton className="h-6 w-32" />
+          <Skeleton className="h-6 w-24" />
+        </div>
+      </div>
+    </div>
+  );
+}

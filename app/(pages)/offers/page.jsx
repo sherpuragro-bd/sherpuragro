@@ -1,6 +1,7 @@
 import Image from "next/image";
 import GiftImage from "../../../public/img/giftbig.png";
-import OfferCardServer from "./OfferCardServer";
+import OfferCardServer, { OfferCardSkeleton } from "./OfferCardServer";
+import { Suspense } from "react";
 
 const page = () => {
   return (
@@ -28,7 +29,16 @@ const page = () => {
       </section>
       <section className="flex justify-center pb-10">
         <div className="max-w-primary w-full gap-5 px-5 py-10 grid grid-cols-12">
-          <OfferCardServer />
+          <Suspense
+            fallback={Array.from({ length: 6 }).map((_, index) => (
+              <OfferCardSkeleton
+                index={index}
+                key={`offer-skeleton-${index}`}
+              />
+            ))}
+          >
+            <OfferCardServer />
+          </Suspense>
         </div>
       </section>
     </>

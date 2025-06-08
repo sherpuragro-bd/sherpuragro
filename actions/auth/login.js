@@ -17,6 +17,6 @@ export const loginUser = async (data) => {
 };
 
 export const logoutUser = async () => {
-  await logout();
   await signOut();
+  await logout();
 };

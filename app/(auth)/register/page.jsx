@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import RegisterForm from "./RegisterForm";
+import Loader from "@/app/(pages)/(shop)/checkout/loading";
 
 export const metadata = {
   title: "রেজিস্ট্রেশন করুন",
@@ -12,7 +13,7 @@ export default function Register() {
     <>
       <section className="flex justify-center">
         <div className="w-full max-w-primary px-5 items-center justify-center py-40 inline-flex">
-          <Suspense>
+          <Suspense fallback={<Loader />}>
             <RegisterForm />
           </Suspense>
         </div>

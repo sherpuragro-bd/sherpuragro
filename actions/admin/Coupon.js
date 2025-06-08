@@ -30,7 +30,7 @@ export const getOffers = async () => {
     const now = new Date();
 
     const res = await couponModel
-      .find({ expiryDate: { $gte: now } }) // Only offers that haven't expired
+      .find({ expiryDate: { $gte: now } })
       .select("-couponLimit")
       .lean();
 
