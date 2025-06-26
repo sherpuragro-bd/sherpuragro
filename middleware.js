@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { authPages, privatePages } from "./middlewares/auth.middleware";
-import { NewAddressesMiddleware } from "./middlewares/account.middleware";
 import { apiSecureMiddleware } from "./middlewares/secureApi";
 
 export async function middleware(req) {
@@ -9,9 +8,7 @@ export async function middleware(req) {
   if (pathname.startsWith("/register") || pathname.startsWith("/login")) {
     return authPages(req);
   }
-  if (pathname.startsWith("/account/addresses/new")) {
-    return privatePages(req, NewAddressesMiddleware);
-  }
+
   if (pathname.startsWith("/account")) {
     return privatePages(req);
   }

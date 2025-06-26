@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 export const ShopContext = createContext();
 
@@ -50,6 +49,11 @@ export const ShopContextProvider = ({ children }) => {
     });
   };
 
+  const cartTotalPrice = cartItems?.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
   const updateProductQuanity = (permalLink, quantity) => {
     if (quantity < 1) {
       return;
@@ -74,6 +78,7 @@ export const ShopContextProvider = ({ children }) => {
         removeItemFromCart,
         addItemToCart,
         updateProductQuanity,
+        cartTotalPrice,
       }}
     >
       {children}

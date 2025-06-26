@@ -1,10 +1,21 @@
 "use client";
 
-import { House, LogOut, MapPin, Settings, ShoppingBasket } from "lucide-react";
+import {
+  House,
+  Loader2,
+  LogOut,
+  MapPin,
+  Settings,
+  ShoppingBasket,
+} from "lucide-react";
 import { SidebarLinks } from "./SidebarLink";
 import { logoutUser } from "@/actions/auth/login";
+import { useContext } from "react";
+import { AppContext } from "@/app/context/AppContext";
 
 export default function AccountSidebar() {
+  const { isLoggingOut, setLoggingOut } = useContext(AppContext);
+
   return (
     <ul className="flex flex-col gap-3">
       {SideBarLinksData.map((link, index) => (
@@ -19,11 +30,19 @@ export default function AccountSidebar() {
         </SidebarLinks>
       ))}
       <button
-        onClick={async () => await logoutUser()}
+        disabled={isLoggingOut}
+        onClick={async () => {
+          setLoggingOut(true);
+          await logoutUser();
+        }}
         className="px-5 py-3 flex items-center border rounded-lg gap-2 transition-all"
       >
         <span className="scale-90">
-          <LogOut strokeWidth={1} className="rotate-180" />
+          {isLoggingOut ? (
+            <Loader2 strokeWidth={1} className="animate-spin" />
+          ) : (
+            <LogOut strokeWidth={1} className="rotate-180" />
+          )}
         </span>
         লগআউট
       </button>

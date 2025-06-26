@@ -2,11 +2,19 @@ import { getUser } from "@/actions/user";
 import { getServerSession } from "next-auth";
 import Checkout from "./checkout";
 
-const CheckoutPage = async () => {
-  const session = await getServerSession();
-  const user = await getUser();
+export const metadata = {
+  title: "চেকআউট । শেরপুর এগ্রো ",
+};
 
-  return <Checkout user={user} session={session} />;
+const CheckoutPage = async () => {
+  const [session, user] = await Promise.all([getServerSession(), getUser()]);
+
+  return (
+    <Checkout
+      user={user ? { isActive: user?.isActive, email: user?.email } : false}
+      session={session ? true : false}
+    />
+  );
 };
 
 export default CheckoutPage;

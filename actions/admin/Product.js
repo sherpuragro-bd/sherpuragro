@@ -1,11 +1,7 @@
 "use server";
 
 import { connectToDB } from "@/lib/connectToDB";
-import {
-  convertMongoIdsInArray,
-  errorHandeler,
-  replaceMongoIdInArray,
-} from "@/lib/utils";
+import { convertMongoIdsInArray, errorHandeler } from "@/lib/utils";
 import ProductModel from "@/models/product.model";
 
 export const createNewProduct = async (payload) => {
@@ -30,7 +26,7 @@ export const getAllPopularProducts = async () => {
       .select(
         " -description -content -stock -minQuantity -maxQuantity -tags -seoTitle -seoDes -seoImage -isPopular -createdAt -updatedAt"
       );
-    return replaceMongoIdInArray(res);
+    return convertMongoIdsInArray(res);
   } catch (err) {
     errorHandeler();
   }

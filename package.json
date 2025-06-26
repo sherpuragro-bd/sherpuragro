@@ -40,6 +40,7 @@
     "input-otp": "^1.4.2",
     "jodit-react": "^5.2.18",
     "jose": "^5.9.6",
+    "libphonenumber-js": "^1.12.9",
     "lucide-react": "^0.475.0",
     "moment": "^2.30.1",
     "mongoose": "^8.10.0",

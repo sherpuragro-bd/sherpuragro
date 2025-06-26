@@ -12,7 +12,7 @@ const Checkout = ({ user, session }) => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    if (!session?.user) {
+    if (!session) {
       setShowLoader(true);
       router.push("/login?redirect=checkout");
     } else if (!user) {
@@ -28,8 +28,7 @@ const Checkout = ({ user, session }) => {
   if (user && user.isActive) {
     return (
       <>
-        <ExitWarning />
-        <CheckoutProcess />;
+        <CheckoutProcess user={user} />;
       </>
     );
   }

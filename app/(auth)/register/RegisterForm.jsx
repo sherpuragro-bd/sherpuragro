@@ -3,6 +3,7 @@
 import { registerUser } from "@/actions/auth/auth";
 import { Input, InputPass } from "@/app/components/ui/Input";
 import LineErro from "@/app/components/ui/LineErro";
+import NumberInput from "@/app/components/ui/NumberInput";
 import SocialLogin from "@/app/components/ui/SocialLogin";
 import { Loader2, Lock, Mail, MoveRight, User, UserPlus } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -45,10 +46,6 @@ export default function RegisterForm() {
       return toast.error("সঠিক ইমেইল লিখুন");
     }
 
-    if (phone.length !== 11) {
-      return toast.error("ফোন নাম্বার ১১ ডিজিট হতে হবে");
-    }
-
     if (password.length < 6) {
       return toast.error("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে");
     }
@@ -89,7 +86,7 @@ export default function RegisterForm() {
           </p>
         </div>
       </div>
-      <div className="w-full pt-5 space-y-7">
+      <div className="w-full pt-5 flex flex-col gap-7">
         <Input
           disabled={isRegistering}
           {...register("name", { required: true })}
@@ -112,44 +109,27 @@ export default function RegisterForm() {
         />
         {errors.email && <LineErro>সঠিক ইমেইল লিখুন</LineErro>}
 
-        <Input
+        <NumberInput
           disabled={isRegistering}
           required={true}
           {...register("phone", { required: true })}
-          icon={
-            <svg
-              width={23}
-              viewBox="0 0 36 36"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="#006A4D"
-                d="M36 27a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v18z"
-              />
-              <circle fill="#F42A41" cx={16} cy="17.5" r={7} />
-            </svg>
-          }
-          onChange={handleChange}
-          value={number}
-          type="number"
-          placeholder="০১৭XXXXXXXX"
           label="ফোন নাম্বার"
         />
-        {errors.phone && <LineErro>ফোন নাম্বার ১১ ডিজিট হতে হবে</LineErro>}
-
-        <InputPass
-          autoComplete="new-password"
-          disabled={isRegistering}
-          required={true}
-          {...register("password", { required: true })}
-          icon={<Lock strokeWidth={0.75} />}
-          placeholder="একটি কঠিন পাসওয়ার্ড লিখুন"
-          label="পাসওয়ার্ড"
-        >
-          {errors.password && (
-            <LineErro>পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে</LineErro>
-          )}
-        </InputPass>
+        <div className="-mt-5">
+          <InputPass
+            autoComplete="new-password"
+            disabled={isRegistering}
+            required={true}
+            {...register("password", { required: true })}
+            icon={<Lock strokeWidth={0.75} />}
+            placeholder="একটি কঠিন পাসওয়ার্ড লিখুন"
+            label="পাসওয়ার্ড"
+          >
+            {errors.password && (
+              <LineErro>পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে</LineErro>
+            )}
+          </InputPass>
+        </div>
 
         <div className="flex items-center -translate-y-2">
           <input

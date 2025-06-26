@@ -2,7 +2,9 @@
 
 import { connectToDB } from "@/lib/connectToDB";
 import { errorHandeler, replaceMongoIdInArray } from "@/lib/utils";
+import { AddressModel } from "@/models/address.model";
 import ProductModel from "@/models/product.model";
+import { getServerSession } from "next-auth";
 
 export const getProductDetails = async (permalLink) => {
   try {
@@ -47,5 +49,18 @@ export const searchProducts = async (search) => {
     return await replaceMongoIdInArray(products);
   } catch (err) {
     errorHandeler(err);
+  }
+};
+
+export const getAddressCount = async () => {
+  try {
+    await connectToDB();
+    const user = await getServerSession();
+    const count = await AddressModel.countDocuments({
+      email: user?.user?.email,
+    });
+    return count;
+  } catch (err) {
+    errorHandeler();
   }
 };
